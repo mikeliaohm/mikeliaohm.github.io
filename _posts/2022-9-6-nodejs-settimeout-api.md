@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "NodeJS: Schedule callback function exceeding the maximum allowed delay."
+title:  "NodeJS: Schedule callback function exceeding the maximum allowed delay"
 date:   2022-9-6 12:11:28 +0800
 categories: NodeJS
 ---
 
-## **setTimeout(): The task scheduler in NodeJS**
+### **setTimeout(): The task scheduler in NodeJS**
 
-`setTimout()` in NodeJS ([documentation here](https://nodejs.org/dist/latest-v16.x/docs/api/timers.html#settimeoutcallback-delay-args)) is an API that allows programmers to schedule functions to be run in the future with some specified delay in time. There are at most three arguments programmers can pass in when invoking it. The first argument is the actual function to be run while the second argument is the desired delay after which the function should be executed. For example,
+`setTimout()` in NodeJS ([documentation here](https://nodejs.org/dist/latest-v16.x/docs/api/timers.html)) is an API that allows programmers to schedule functions to be run in the future with some specified delay in time. There are at most three arguments programmers can pass in when invoking it. The first argument is the actual function to be run while the second argument is the desired delay after which the function should be executed. For example,
 
 &nbsp;
 
@@ -23,7 +23,7 @@ The conosle will only display the text after at least 1000 miliseconds (or 1 sec
 
 &nbsp;
 
-## **The maximum allowed delay in `setTimeout()`**
+### **The maximum allowed delay in `setTimeout()`**
 
 In the documentation, it is mentioned that if the delay variable contains a number more than `2147483647`, it will be set to 1. The magic number itself is the maxium value of a 32-bit signed integer data type. So the natural question becomes: what if we need to schedule a task longer than that limit? Well, to many programmers this might not matter too much if all the scheduling tasks are within the boundary. When converted into days, the maximum allowed delay is between 24 and 25 days, so that seems pretty long already right? But there might still be some use cases in scheduling a task over that time frame. For example, there might be some background operations on filesystem or logs that only need to be done once a month.
 
@@ -79,13 +79,13 @@ setTimeout(() => {
 
 &nbsp;
 
-## **A solution to the maximum delay limit**
+### **A solution to the maximum delay limit**
 
 I recently wrote a Typescript library to abstract away the complication of managing those unschedulable tasks. The library[node-jobs-scheduler](https://www.npmjs.com/package/node-jobs-scheduler) features a scheduler that provides an easy way to manage scheduling tasks with delays not bounded by the limit imposed by `setTimeout()`. The scheduler also acts as a center store for hosting the tasks and provides an unified suite of APIs to programmers. The scheduler exposes APIs with more descriptive function names such as `schedule_in_milisec()`, `schedule_in_secs()`, and `schedule_at_date()` for the convenience of the users. When users trying to schedule tasks that exceed the maxium delay, the tasks will be put onto the scheduler's internal `pending_queue` until they become schedulable to be enqueued in Node's timer queue. The scheduler also provides a way for users to remove the tasks already in Node's timer queue or those still not schedulable (i.e. in the `pending_queue`). The details of handling all these mundane operations are hidden from the users of the library.
 
 &nbsp;
 
-## **Using the node-jobs-scheduler**
+### **Using the node-jobs-scheduler**
 
 The library contains `class Scheduler` in `Scheduler.ts` which wraps the above-mentionedfunctionalities under one roof. In most cases, I presume only one instance of `class Scheduler` should be initialized. But in a multi-user application where each user is given his/her own unique scheduler, constructing more than one instance might be appropriate as long as the application does not mix up all those scheduler instances. The initialization can be done when the Node runtime starts up. For example, many Node applications will define either a `server.ts` or `server.js` to service HTTP requests from the client. The scheduler can be constructed by code similar to the following
 
@@ -101,7 +101,7 @@ http.createServer(function (req, res)) {
 
 &nbsp;
 
-## **Implementation detail of the libray**
+### **Implementation detail of the libray**
 
 Within `class Scheduler`, I have defined several attributes to manage the lifecycles of the tasks, whether they are schedulable or not based from the standpoint of Node's timer queue. The attributes of `class Scheduler` looks like the following.
 
@@ -181,7 +181,7 @@ if (pending_queue.heap_size() > 0) {
 
 &nbsp;
 
-## **Some more notes about priority queue**
+### **Some more notes about priority queue**
 
 The priority queue in this library is implemented from scratch without using any dependency. However, to make sure the implementation works, I have done some testing on the varaiable APIs provided in `class PriorityQueue`. (In fact, there are also testings in other parts of the library that contain critical code.) Although these test cases are by no means comprehensive, they should give the user of the library some confidence that the algorithm does do its job. Also, I did not test on the running time of the implementation. However, based on reasoning about the code, the `extract_min()` should be O(log(n)) as advertised by the algorithm's design. The recursive part of `extract_min()` comes from a call to `heapify()`. Even though `heapify()` itself is a recursive function, it will not need to compare a node with every other node in the heap. Instead, once it is determined that a child node (left or right) should be promoted to a subtree root, `heapify()` only recurses on that part of the subtree while ignore the other part and the process stays the same at every level of the tree. That observation should establish a running time of O(log(n)).
 
