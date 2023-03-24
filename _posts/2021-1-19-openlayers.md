@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Creating a map app using Openlayers with a dockerized maptile server"
+title:  "JS: Creating a map app using Openlayers with a dockerized maptile server"
 date:   2021-1-19 12:11:28 +0800
 categories: JS
 ---

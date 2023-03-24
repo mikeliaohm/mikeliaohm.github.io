@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Export the Albums in MacOS' Photos App using C++ and Qt"
+title:  "C++: Export the Albums in MacOS' Photos App using Qt"
 date:   2023-2-10 10:11:28 +0800
 categories: C++ Qt GUI multithreading
 ---

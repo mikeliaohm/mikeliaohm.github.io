@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "A Django project with MSSQL database"
+title:  "Python: A Django project with MSSQL database"
 date:   2021-5-10 12:11:28 +0800
 categories: Python Django
 ---

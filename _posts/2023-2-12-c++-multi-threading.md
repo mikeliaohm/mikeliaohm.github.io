@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "C++ multi-threading (and the synchronization) in a Qt App"
+title:  "C++: Multi-threading (and the synchronization) in a Qt App"
 date:   2023-2-12 10:11:28 +0800
 categories: C++ Qt multithreading
 ---
