@@ -41,7 +41,7 @@ In my application, multi-threading is used when the program exports the photos i
 
 #### mainwindow.cpp
 
-```C++
+```c++
 #define TASK_BUCKET_SIZE 10   // default value is 10
 ```
 
@@ -49,7 +49,7 @@ I created a data structure `Task` to represent a media file to be processed. In 
 
 #### Task.h: **struct Task**
 
-```C++
+```c++
 struct Task
 {
   std::string file_dir;         /* Directory. */
@@ -65,7 +65,7 @@ struct Task
 
 #### Task.h: **TaskManager::tasks**
 
-```C++
+```c++
 class TaskManager : pubic QObject
 {
   // ...
@@ -81,7 +81,7 @@ Obviously, we don't want multiple worker threads processing the same bucket. The
 
 #### Task.h: **TaskManager::buk_to_process**
 
-```C++
+```c++
 class TaskManager : pubic QObject
 {
   // ...
@@ -98,7 +98,7 @@ The thread library is part of the C++ std library and is defined in header [`<th
 
 #### mainwindow.cpp: **act_on_next**
 
-```C++
+```c++
 void
 MainWindow::act_on_next ()
 {
@@ -124,7 +124,7 @@ MainWindow::act_on_next ()
 
 #### TaskExe.cpp: **pick_up_bucket**
 
-```C++
+```c++
 static const size_t
 pick_up_bucket (TaskManager &task_manager)
 {
@@ -150,7 +150,7 @@ Therefore, I added a progress dialog in `TaskManager` so that the main thread ca
 
 #### Task.cpp: **update_progress**
 
-```C++
+```c++
 void
 TaskManager::update_progress ()
 {
@@ -177,7 +177,7 @@ Implementation of the worker thread's progress updating is in `complete_task`.
 
 #### TaskExe.cpp: **complete_task**
 
-```C++
+```c++
 static void
 complete_task (TaskManager &task_manager, const int success_cnt,
                const int error_cnt)
@@ -193,7 +193,7 @@ Implementation of the main thread's progress updating is in `update_progress`.
 
 #### mainwindow.cpp: **update_progress**
 
-```C++
+```c++
 static void
 update_progress (TaskManager &task_manager)
 {
