@@ -1,15 +1,20 @@
 ---
-layout: post
 title:  "JS: Batch Fetching Network Requests for Images - Part II"
 date:   2023-3-20 10:00:00 +0800
 categories: javascript
+tags:
+  - Service Worker
+  - JavaScript
+  - Python
+  - PHP
 ---
+
+This article is the second part of the post. I tested the batch fetching idea in Synology's Photo Station web interface. Check out the [first part](/javascript/2023/03/20/batch-fetching-network-requests-I.html) for some background information. In part I, I also provided a performance comparison of the target app with and without batch fetching.
 
 <!-- omit in toc -->
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [How to achieve batch fetching on `img` tags](#how-to-achieve-batch-fetching-on-img-tags)
+- [How to achieve batch fetching on img tags](#how-to-achieve-batch-fetching-on-img-tags)
 - [Service worker to the rescue](#service-worker-to-the-rescue)
 - [Intercept network requests](#intercept-network-requests)
 - [Handle the batch fetch message from service worker](#handle-the-batch-fetch-message-from-service-worker)
@@ -17,11 +22,7 @@ categories: javascript
 - [The backend](#the-backend)
 - [Ending notes](#ending-notes)
 
-### Introduction
-
-This article is the second part of the post. I tested the batch fetching idea in Synology's Photo Station web interface. Check out the [first part](/javascript/2023/03/20/batch-fetching-network-requests-I.html) for some background information. In part I, I also provided a performance comparison of the target app with and without batch fetching.
-
-### How to achieve batch fetching on `img` tags
+### How to achieve batch fetching on img tags
 
 Normally, when the DOM contains an `img` tag, the browser will schedule a fetch request based on the `src` attribute of that tag. However, it's the browser's job to make those fetch requests and populate the tags after the requests are resolved. The user or programmer has no control on the ordering of the requests once the browser starts to queue up those requests on your behalf. Each request's response timing is also subject to various conditions, the network traffic, the server, and the asset in request.
 

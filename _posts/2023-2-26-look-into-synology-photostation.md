@@ -1,14 +1,18 @@
 ---
-layout: post
 title:  "A Look into Synology's Photo Station app"
 date:   2023-2-26 13:00:00 +0800
 categories: photostation
+tags:
+  - Shell
+  - PHP
+  - PostgreSQL
 ---
+
+I purchased a Synology DS214Play NAS few years ago and it has served as my primary photo storage and media file server. The NAS was shipped with a preinstalled application called `Photo Station` that allows users to manage photos and videos through a web interface. Since it's becoming less and less performant lately, I decided to take a closer look at how the app is run and what might have caused the performance issue. This blog is mostly documenting the various resources needed to operate the `Photo Station` app. 
 
 <!-- omit in toc -->
 ## Table of Contents
 
-- [Introduction](#introduction)
 - [Where are the files located?](#where-are-the-files-located)
 - [The App structures and the WebAPIs](#the-app-structures-and-the-webapis)
 - [Photo/Video Upload WebAPI](#photovideo-upload-webapi)
@@ -17,13 +21,9 @@ categories: photostation
   - [PostgreSQL](#postgresql)
 - [Final notes](#final-notes)
 
-### Introduction
-
-I purchased a Synology DS214Play NAS few years ago and it has served as my primary photo storage and the media file server. The NAS was shipped with a preinstalled application called Photo Station that allows users to manage photos and videos through a web interface. Since it's becoming less and less performant lately, I decided to take a closer look at how the app is run and what might have caused the performance issue.
+### Where are the files located?
 
 My NAS runs DSM 6.2 and Photo Station 6. It appears Photo Station 6 has not been updated since 2021 and Synology rolled out a newer photo app called Synology Photos. So for anyone owning a newer Synology NAS, the photo app preinstalled is probably Synology Photos instead of Photo Station. It seems these two are completely different apps and Synology Photos' source is mostly in JavaScript (built from NodeJS?) while Photo Station's backend is written in PHP with some JavaScript for the web interface.
-
-### Where are the files located?
 
 Since the NAS runs a version of linux operating system, for anyone who's familiar with linux, it's actually quite easy to `ssh` into the operating system and take a closer look at how `Photo Station` operates under the hood. First, you should enable the `ssh` service in DSM and you could follow the [instruction here](https://kb.synology.com/en-id/DSM/tutorial/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet). Once we `ssh` into the Synology NAS, we could navigate to the folder where the `Photo Station` app is stored.
 

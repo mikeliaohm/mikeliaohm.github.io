@@ -1,8 +1,11 @@
 ---
-layout: post
 title:  "NodeJS: Schedule callback function exceeding the maximum allowed delay"
 date:   2022-9-6 12:11:28 +0800
-categories: NodeJS
+categories: javascript
+tags:
+  - JavaScript
+  - TypeScript
+  - NodeJS
 ---
 
 ### **setTimeout(): The task scheduler in NodeJS**

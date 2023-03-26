@@ -1,8 +1,12 @@
 ---
-layout: post
 title:  "C++: Multi-threading (and the synchronization) in a Qt App"
 date:   2023-2-12 10:11:28 +0800
-categories: C++ Qt multithreading
+categories: C++
+tags:
+  - C++
+  - Qt
+  - Multithreading
+  - Synchronization
 ---
 
 This post discusses the multi-threading and synchronization implementation of a [Qt application](https://mikeliaohm.github.io/c++/qt/gui/multithreading/2023/02/10/export-photo-albums.html) to export albums in MacOS' `Photos` app. Check out the link to the previous blog mentioned above if you are interested in the overall project layout and implementation details of the GUI. This post instead goes into the implementation detail of the multi-threading part of the application.

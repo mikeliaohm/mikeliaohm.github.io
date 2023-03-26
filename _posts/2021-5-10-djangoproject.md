@@ -1,8 +1,11 @@
 ---
-layout: post
 title:  "Python: A Django project with MSSQL database"
 date:   2021-5-10 12:11:28 +0800
-categories: Python Django
+categories: python
+tags:
+  - Python
+  - Django
+  - MSSQL DB
 ---
 
 [Django](https://www.djangoproject.com/) is a python framework to build websites and has been popular among python programmers. If you are looking for a comprehensive framework to build websites, Django is a great tool. However, if you feel Django is kind of an overkill for your project or you don't like the way Django sets up the project, you could instead try [Flask](https://flask.palletsprojects.com/en/2.2.x/). This sample project was created originally as a tutorial to showcase some of Django's APIs and introduce some of the packages we use in one of our projects. Specifically, if you need to connect to a MSSQL database using Django, you could try if the setup in this sample project works for you. I will not go into the details of the implementation, so I assume some familiarity of python and Django. I created a series of step-by-step tutorial videos for Django and some of the code was ported to this project as well. If you are interested, here is the [link (Audio only in Mandarin)](https://www.youtube.com/watch?v=-_0OytPzTo4&list=PLOAhunPTyNdlb2G5VU19Rqj6Qx_rCRYHf&index=15&t=2s).
