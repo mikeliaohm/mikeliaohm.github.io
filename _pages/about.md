@@ -24,7 +24,7 @@ feature_row:
 
 {% include feature_row id="intro" type="center" %}
 
-I created this blog to write about my side projects. As I have a wide range of interests in everything related to programming, I am switching the programming languages I use in different projects all the time. I also believe that sometimes one needs to select the most suitable programming language(s) given the constraints or requirements of different projects. Of course, whenever possible, I'll try to use my favorite language, C++, as much as possible. Having said that, I'm fairly experienced with JavaScript, Python, and C# and are somewhat familiar with Swift, Rust, and Java!
+I created this blog to write about my side projects. As I have a wide range of interests in everything related to programming, I am switching the programming languages I use in different projects all the time. I also believe that sometimes one needs to select the most suitable programming language(s) given the constraints or requirements of different projects. Of course, whenever possible, I'll try to use my favorite language, C++, as much as possible. Having said that, I'm fairly experienced with JavaScript, Python, and C# and somewhat familiar with Swift, Rust, and Java!
 
 I like to dig deeper into how software is written and designed. I also frequently try to revamp some legacy software if the user experience is really bad. Of course, this requires a bit of reverse engineering and my ability in spotting the right issues. Sometimes I fail miserably. I program in MacOS whenever I can but I also use Windows and Linux at work or when required.
 
