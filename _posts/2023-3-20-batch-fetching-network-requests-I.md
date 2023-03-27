@@ -6,6 +6,7 @@ tags:
   - Chrome Developer Console
   - JavaScript
   - HTML
+  - Service Worker
 ---
 
 The blog is related to my previous post: [A Look into Synology's Photo Station app](/photostation/2023/02/26/look-into-synology-photostation.html) where I pointed out a performance issue. Please refer to that article for some background information. In this two part post, I'll try to implement a solution to deal with the issue. By altering the way network requests are made, we could greatly enhance the user experience and make better use of the computation resources in the Synology NAS. Although the code will be tailored for boosting the performance of the Photo Station app, the general principles or techniques in the implementation should be applicable in different settings as well.

@@ -82,7 +82,7 @@ self.addEventListener("fetch", (event) => {
 });
 ```
 
-Here, the service worker is told to handle the fetches with request url containing `webapi/thumb.php`. Each request for the thumbnail will be instructed to fetch some placeholder image can be responded really fast. The call to `event.respondWith` is used to achieved that. Although each thumb request will be responded right away, we need to keep track of what has been requested along the way so that we could perform a batch fetch in some future time.
+Here, the service worker is told to handle the fetches with request url containing `webapi/thumb.php`. Each request for the thumbnail will be instructed to fetch some placeholder image that can be responded really fast. The call to `event.respondWith` is used to achieve that. Although each thumb request will be responded right away, we need to keep track of what has been requested along the way so that we could perform a batch fetch in some future time.
 
 To record the thumb requests coming in, some data structure will be needed. Here, I declared a global variable `kTHUMB_SET` of type `Set` to store the unique id of the thumbnails being requested. Every time a fetch request comes in, the code will insert an entry in `kTHUMB_SET`. Then, if the set accumulates enough fetch requests, service worker will trigger a batch fetch.
 
@@ -166,9 +166,9 @@ function update_thumb_src(img_data) {
 
 ### The backend
 
-The bulk of the solutions rely on two new JavaScript files I wrote and I didn't have to alter any of the JS code written by Synology. However, to hook up everything, I had to write some code in the backend as well. For example, I mentioned earlier I had to create a customized API in PHP that handles the batch request. I called it `batch_fetch.php`. That part is a bit of reverse engineering the original thumb API plus creating a custom JSON response that encodes thumbnail image files into base64 text. 
+The bulk of the solution relies on two new JavaScript files I wrote and I didn't have to alter any of the JS code written by Synology. However, to hook up everything, I had to write some code in the backend as well. For example, I mentioned earlier I had to create a customized API in PHP that handles the batch request. I called it `batch_fetch.php`. That part is a bit of reverse engineering the original thumb API plus creating a custom JSON response that encodes thumbnail image files into base64 text. 
 
-Also, I used python to encode images into base64 text is at the bottom. This should be fairly straightforward and there is no requirement for other 3rd party libraries. The code is invoked in a child process by calling `shell_exec` in my `batch_fetch.php`.
+I used python to encode images into base64 text. This should be fairly straightforward and there is no requirement for other 3rd party libraries. The code is invoked in a child process by calling `shell_exec` in my `batch_fetch.php`.
 
 ```python
 import argparse
@@ -206,8 +206,8 @@ if __name__ == "__main__":
 
 ### Ending notes
 
-That is! The process of working out this solution is quite interesting since any code I wrote cannot be tested locally and had to be deployed in the Synology NAS directly. This is expected cause I couldn't recreate a Photo Station environment in my local PC. Plus, I'm not affiliated with Synology so it took me some time to figure out what goes where and how. However, I felt the result after implementing the solution really satisfying and I probably could extend the life of my NAS for some more time.
+That is! The process of working out this solution is quite interesting since any code I wrote cannot be tested locally and had to be deployed in the Synology NAS directly. This is expected cause I couldn't recreate a Photo Station environment in my local PC. Plus, I'm not affiliated with Synology so it took me some time to figure out what goes where and how. However, I felt the result really satisfying after implementing the solution and I probably could extend the life of my NAS for some more time.
 
-There is some restriction in writing and deploying code in the Synology's NAS. The linux OS is not installed with any package manager (no apt, apt-get) but fortunately, it's installed with python 3.8 and vim. However, I still had to install a lightweight package manager `ipkg` to install `git` so that I could revert back to the default environment. 
+There is some restriction in writing and deploying code in the Synology's NAS. The linux OS is not installed with any package manager (no apt, apt-get) but fortunately, it's installed with python 3.8 and vim. However, I still had to install a lightweight package manager `ipkg` to install `git` so that I could revert back to the default environment.
 
 The code I provided in the blog is not the complete solution and there are many tweaks to account for different cases (such as handling the residual number of thumbnail requests not adding up to a batch size). I'm also testing some of the remaining corner cases. If you're interested in learning more about this solution, feel free to contact me. Cheers!
