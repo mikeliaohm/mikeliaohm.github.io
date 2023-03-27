@@ -1,5 +1,5 @@
 ---
-title:  "JS: Batch Fetching Network Requests for Images - Part I"
+title:  "JS Service Worker: Batch Fetching Network Requests for Images - Part I"
 date:   2023-3-20 10:00:00 +0800
 categories: javascript
 tags:
