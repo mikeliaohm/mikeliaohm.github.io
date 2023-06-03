@@ -206,7 +206,7 @@ if __name__ == "__main__":
 
 ### Ending notes
 
-That is! The process of working out this solution is quite interesting since any code I wrote cannot be tested locally and had to be deployed in the Synology NAS directly. This is expected cause I couldn't recreate a Photo Station environment in my local PC. Plus, I'm not affiliated with Synology so it took me some time to figure out what goes where and how. However, I felt the result really satisfying after implementing the solution and I probably could extend the life of my NAS for some more time.
+That's it! The process of working out this solution is quite interesting since any code I wrote cannot be tested locally and had to be deployed in the Synology NAS directly. This is expected cause I couldn't recreate a Photo Station environment in my local PC. Plus, I'm not affiliated with Synology so it took me some time to figure out what goes where and how. However, I felt the result really satisfying after implementing the solution and I probably could extend the life of my NAS for some more time.
 
 There is some restriction in writing and deploying code in the Synology's NAS. The linux OS is not installed with any package manager (no apt, apt-get) but fortunately, it's installed with python 3.8 and vim. However, I still had to install a lightweight package manager `ipkg` to install `git` so that I could revert back to the default environment.
 
